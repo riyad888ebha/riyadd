@@ -3,26 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Support Center</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<title>Support Tickets</title>
 
 <style>
-:root {
-    --bg: #0b0d12;
-    --panel: #11141b;
-    --panel2: #171a22;
-    --border: #262b36;
-    --text: #f5f7fa;
-    --muted: #8d96a5;
-    --accent: #5865f2;
-    --accent2: #7289da;
-    --danger: #ed4245;
-    --success: #3ba55d;
-    --warning: #faa61a;
-}
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -31,299 +14,302 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    background: #0b0d12;
+    color: #fff;
     min-height: 100vh;
 }
 
-/* =========================
-   LOGIN
-========================= */
+/* TOP NAV */
 
-#loginScreen {
-    min-height: 100vh;
+.navbar {
+    height: 65px;
+    background: #11141b;
+    border-bottom: 1px solid #252936;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background:
-        radial-gradient(circle at top, #20275a 0%, transparent 40%),
-        var(--bg);
-}
-
-.login-box {
-    width: 100%;
-    max-width: 430px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 25px 80px rgba(0,0,0,.5);
+    justify-content: space-between;
+    padding: 0 30px;
 }
 
 .logo {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 20px;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--accent);
-    font-size: 32px;
+    font-size: 20px;
+    font-weight: 800;
 }
 
-.login-box h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
+.logo span {
+    color: #5865f2;
 }
 
-.login-box p {
-    color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-.discord-btn {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    background: var(--accent);
-    color: white;
-    font-weight: bold;
-    font-size: 15px;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.discord-btn:hover {
-    background: #4752c4;
-    transform: translateY(-1px);
-}
-
-/* =========================
-   APP
-========================= */
-
-#app {
-    display: none;
-    min-height: 100vh;
-}
-
-.layout {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar {
-    width: 260px;
-    background: #0e1016;
-    border-right: 1px solid var(--border);
-    padding: 20px 14px;
-    display: flex;
-    flex-direction: column;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px;
-    margin-bottom: 25px;
-}
-
-.brand-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.brand span {
-    font-weight: bold;
-    font-size: 17px;
-}
-
-.section-title {
-    color: #687080;
-    font-size: 11px;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 10px;
-}
-
-.nav-btn {
-    width: 100%;
-    border: none;
-    background: transparent;
-    color: #aeb6c4;
-    padding: 11px 12px;
-    border-radius: 8px;
-    text-align: left;
-    cursor: pointer;
-    margin-bottom: 3px;
-    font-size: 14px;
-}
-
-.nav-btn:hover,
-.nav-btn.active {
-    background: #1c2030;
-    color: white;
-}
-
-.user-box {
-    margin-top: auto;
-    background: #151820;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px;
-}
-
-.user-info {
+.nav-user {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
 .avatar {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    object-fit: cover;
-    background: #303642;
-}
-
-.username {
-    font-size: 13px;
+    background: #5865f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: bold;
 }
 
-.role {
-    color: var(--muted);
-    font-size: 11px;
-    margin-top: 3px;
+/* MAIN */
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 50px 20px;
 }
 
-.logout-btn {
-    margin-top: 10px;
-    width: 100%;
-    border: none;
-    background: #222630;
-    color: #aeb6c4;
-    padding: 8px;
-    border-radius: 7px;
-    cursor: pointer;
-}
-
-.logout-btn:hover {
-    background: #2c303b;
-    color: white;
-}
-
-/* =========================
-   CONTENT
-========================= */
-
-.content {
-    flex: 1;
-    padding: 35px;
-    overflow-x: hidden;
-}
-
-.page {
-    display: none;
-}
-
-.page.active {
-    display: block;
-}
-
-.page-title {
-    margin-bottom: 8px;
-    font-size: 28px;
-}
-
-.page-description {
-    color: var(--muted);
-    margin-bottom: 28px;
-}
-
-/* =========================
-   HOME
-========================= */
+/* HERO */
 
 .hero {
-    background:
-        radial-gradient(circle at right top, #303b91, transparent 35%),
-        linear-gradient(135deg, #151a2b, #11141b);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 35px;
-    margin-bottom: 25px;
+    text-align: center;
+    margin-bottom: 35px;
 }
 
 .hero h1 {
-    font-size: 34px;
-    margin-bottom: 10px;
+    font-size: 42px;
+    margin-bottom: 12px;
 }
 
 .hero p {
-    color: #aab2c0;
+    color: #949cab;
+    font-size: 16px;
+}
+
+/* TICKET PANEL */
+
+.ticket-panel {
+    background:
+        radial-gradient(circle at top right, #29316e, transparent 35%),
+        #151922;
+
+    border: 1px solid #292e3b;
+    border-radius: 18px;
+    padding: 40px;
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35);
+}
+
+.panel-icon {
+    width: 70px;
+    height: 70px;
+    margin: auto auto 20px;
+
+    background: #5865f2;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+}
+
+.ticket-panel h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.ticket-panel p {
+    color: #9ba3b2;
     max-width: 650px;
+    margin: auto;
     line-height: 1.6;
 }
 
-.open-ticket-btn {
-    margin-top: 22px;
+.open-btn {
+    margin-top: 25px;
+    padding: 14px 25px;
+
     border: none;
-    padding: 13px 20px;
-    background: var(--accent);
-    color: white;
     border-radius: 9px;
+
+    background: #5865f2;
+    color: white;
+
     font-weight: bold;
+    font-size: 15px;
+
     cursor: pointer;
+    transition: .2s;
 }
 
-.open-ticket-btn:hover {
+.open-btn:hover {
     background: #4752c4;
+    transform: translateY(-2px);
 }
 
-.stats {
+/* INFO */
+
+.info-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
+    margin-top: 20px;
 }
 
-.stat {
-    background: var(--panel);
-    border: 1px solid var(--border);
+.info-card {
+    background: #11141b;
+    border: 1px solid #252936;
     border-radius: 14px;
     padding: 22px;
 }
 
-.stat-number {
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 5px;
+.info-card h3 {
+    margin-bottom: 8px;
 }
 
-.stat-label {
-    color: var(--muted);
+.info-card p {
+    color: #8992a1;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* MODAL */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,.75);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    z-index: 100;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 500px;
+
+    background: #151922;
+    border: 1px solid #2a2f3c;
+
+    border-radius: 16px;
+    padding: 28px;
+
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    color: #c8cdd7;
     font-size: 13px;
+    margin: 15px 0 7px;
 }
 
-/* =========================
-   TICKETS
-========================= */
+input,
+select,
+textarea {
+    width: 100%;
+
+    background: #0d1016;
+    color: white;
+
+    border: 1px solid #292e3a;
+    border-radius: 8px;
+
+    padding: 12px;
+    outline: none;
+}
+
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #5865f2;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cancel {
+    flex: 1;
+    padding: 12px;
+
+    background: transparent;
+    color: white;
+
+    border: 1px solid #303541;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.create {
+    flex: 1;
+    padding: 12px;
+
+    background: #5865f2;
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+    display: none;
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.dashboard.active {
+    display: block;
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.dashboard-header h1 {
+    font-size: 28px;
+}
+
+.back-btn {
+    padding: 9px 15px;
+    background: #20242d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* TICKETS */
 
 .ticket-list {
     display: flex;
@@ -331,20 +317,24 @@ body {
     gap: 10px;
 }
 
-.ticket {
-    background: var(--panel);
-    border: 1px solid var(--border);
+.ticket-item {
+    background: #11141b;
+    border: 1px solid #252936;
+
     border-radius: 12px;
+
     padding: 17px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     cursor: pointer;
     transition: .2s;
 }
 
-.ticket:hover {
-    border-color: #3b4260;
+.ticket-item:hover {
+    border-color: #5865f2;
     transform: translateY(-1px);
 }
 
@@ -355,194 +345,113 @@ body {
 }
 
 .ticket-icon {
-    width: 42px;
-    height: 42px;
+    width: 43px;
+    height: 43px;
+
     border-radius: 10px;
-    background: #1d2447;
+    background: #202653;
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.ticket-title {
+.ticket-name {
     font-weight: bold;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
 }
 
-.ticket-meta {
-    color: var(--muted);
+.ticket-info {
+    color: #818a99;
     font-size: 12px;
 }
 
-.status {
+.badge {
     padding: 6px 10px;
     border-radius: 20px;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: bold;
 }
 
-.status.open {
-    background: rgba(59,165,93,.15);
-    color: #57d47c;
+.badge.open {
+    background: #163d27;
+    color: #55d77c;
 }
 
-.status.closed {
-    background: rgba(237,66,69,.15);
-    color: #ff6b6b;
+.badge.closed {
+    background: #3c191b;
+    color: #ff6b70;
 }
 
-/* =========================
-   MODAL
-========================= */
+/* TICKET CHAT */
 
-.modal {
+.chat {
     display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.75);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 20px;
 }
 
-.modal.show {
-    display: flex;
-}
-
-.modal-box {
-    width: 100%;
-    max-width: 500px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 25px;
-}
-
-.modal-box h2 {
-    margin-bottom: 20px;
-}
-
-label {
+.chat.active {
     display: block;
-    color: #c9ced8;
-    font-size: 13px;
-    margin: 15px 0 7px;
 }
 
-input,
-select,
-textarea {
-    width: 100%;
-    border: 1px solid var(--border);
-    background: #0c0f15;
-    color: white;
-    border-radius: 8px;
-    padding: 12px;
-    outline: none;
-}
+.chat-header {
+    background: #151922;
+    border: 1px solid #292e3a;
+    padding: 18px;
 
-textarea {
-    min-height: 110px;
-    resize: vertical;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: var(--accent);
-}
-
-.modal-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.primary {
-    flex: 1;
-    border: none;
-    background: var(--accent);
-    color: white;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.secondary {
-    flex: 1;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: white;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-/* =========================
-   TICKET VIEW
-========================= */
-
-.ticket-view {
-    display: none;
-    height: calc(100vh - 70px);
-    flex-direction: column;
-}
-
-.ticket-view.show {
-    display: flex;
-}
-
-.ticket-header {
-    background: var(--panel);
-    border: 1px solid var(--border);
     border-radius: 12px 12px 0 0;
-    padding: 17px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.ticket-header-left h2 {
-    font-size: 18px;
+.chat-title {
+    font-weight: bold;
 }
 
-.ticket-header-left p {
-    color: var(--muted);
+.chat-category {
+    color: #858e9e;
     font-size: 12px;
-    margin-top: 4px;
+    margin-top: 5px;
 }
 
-.ticket-actions {
+.chat-actions {
     display: flex;
     gap: 7px;
 }
 
-.small-btn {
+.action {
     border: none;
-    padding: 8px 12px;
     border-radius: 7px;
-    cursor: pointer;
+    padding: 8px 12px;
+
+    background: #252a35;
     color: white;
-    background: #292e3a;
+
+    cursor: pointer;
 }
 
-.small-btn:hover {
-    background: #363c4a;
+.action:hover {
+    background: #343a48;
 }
 
-.close-ticket {
-    background: var(--danger);
+.action.close {
+    background: #ed4245;
 }
 
-.messages {
-    flex: 1;
+.chat-messages {
+    height: 450px;
     overflow-y: auto;
+
+    background: #0e1117;
+
+    border-left: 1px solid #292e3a;
+    border-right: 1px solid #292e3a;
+
     padding: 20px;
-    background: #0d1016;
-    border-left: 1px solid var(--border);
-    border-right: 1px solid var(--border);
 }
 
 .message {
@@ -554,160 +463,167 @@ textarea:focus {
 .message-avatar {
     width: 38px;
     height: 38px;
+
     border-radius: 50%;
-    object-fit: cover;
+    background: #5865f2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
 }
 
-.message-author {
-    font-weight: bold;
+.message-name {
     font-size: 14px;
+    font-weight: bold;
 }
 
 .message-time {
-    color: #687080;
+    color: #626a78;
     font-size: 10px;
-    margin-left: 7px;
+    margin-left: 6px;
 }
 
 .message-text {
-    margin-top: 4px;
-    color: #d2d6de;
-    white-space: pre-wrap;
+    color: #c9ced8;
+    margin-top: 5px;
     line-height: 1.5;
+    white-space: pre-wrap;
 }
 
-.message-box {
+.message-input {
     display: flex;
     gap: 10px;
-    background: var(--panel);
-    border: 1px solid var(--border);
+
+    background: #151922;
+
+    border: 1px solid #292e3a;
+
     border-radius: 0 0 12px 12px;
+
     padding: 12px;
 }
 
-.message-box input {
+.message-input input {
     flex: 1;
 }
 
-.send-btn {
-    border: none;
-    background: var(--accent);
-    color: white;
+.send {
     padding: 0 20px;
+
+    border: none;
     border-radius: 8px;
+
+    background: #5865f2;
+    color: white;
+
     cursor: pointer;
     font-weight: bold;
 }
 
-/* =========================
-   ROLES
-========================= */
+/* ROLES */
 
-.role-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
+.roles {
+    margin-top: 30px;
+    background: #11141b;
+    border: 1px solid #252936;
+    border-radius: 14px;
+    padding: 22px;
 }
 
-.role-table th,
-.role-table td {
-    padding: 14px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-}
-
-.role-table th {
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.role-select {
-    width: 150px;
-}
-
-/* =========================
-   EMPTY
-========================= */
-
-.empty {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--muted);
-}
-
-.empty-icon {
-    font-size: 45px;
+.roles h2 {
     margin-bottom: 15px;
 }
 
-/* =========================
-   TOAST
-========================= */
+.role-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.role {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.owner {
+    background: #7d3cff;
+}
+
+.admin {
+    background: #e04747;
+}
+
+.moderator {
+    background: #3478db;
+}
+
+.support {
+    background: #269b63;
+}
+
+.member {
+    background: #586170;
+}
+
+/* EMPTY */
+
+.empty {
+    text-align: center;
+    padding: 50px;
+    color: #7e8796;
+}
+
+/* TOAST */
 
 .toast {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    background: #171b24;
-    border: 1px solid var(--border);
+
+    background: #181c25;
+    border: 1px solid #303643;
+
     padding: 14px 18px;
-    border-radius: 10px;
+
+    border-radius: 9px;
+
     display: none;
+
     z-index: 500;
-    box-shadow: 0 15px 40px rgba(0,0,0,.4);
 }
 
 .toast.show {
     display: block;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
-@media(max-width: 800px) {
+@media(max-width: 700px) {
 
-    .sidebar {
-        width: 70px;
-        padding: 12px 8px;
-    }
-
-    .brand span,
-    .section-title,
-    .nav-btn span,
-    .user-box .username,
-    .user-box .role,
-    .logout-btn {
-        display: none;
-    }
-
-    .brand {
-        justify-content: center;
-    }
-
-    .nav-btn {
-        text-align: center;
-        font-size: 20px;
-    }
-
-    .user-info {
-        justify-content: center;
-    }
-
-    .content {
-        padding: 20px;
-    }
-
-    .stats {
+    .info-grid {
         grid-template-columns: 1fr;
     }
 
-    .ticket {
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .ticket-panel {
+        padding: 25px;
+    }
+
+    .dashboard-header {
         align-items: flex-start;
-        gap: 10px;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .chat-messages {
+        height: 400px;
     }
 }
 </style>
@@ -715,349 +631,165 @@ textarea:focus {
 
 <body>
 
-<!-- =========================
-     LOGIN SCREEN
-========================= -->
+<!-- NAVBAR -->
 
-<div id="loginScreen">
+<nav class="navbar">
 
-    <div class="login-box">
-
-        <div class="logo">
-            🎫
-        </div>
-
-        <h1>Support Center</h1>
-
-        <p>
-            Login with Discord to create tickets,
-            contact our team and manage your support requests.
-        </p>
-
-        <button class="discord-btn" onclick="loginWithDiscord()">
-            Continue with Discord
-        </button>
-
+    <div class="logo">
+        🎫 <span>Support</span> Center
     </div>
 
-</div>
+    <div class="nav-user">
+        <div class="avatar">R</div>
+        <span>Riyad</span>
+    </div>
+
+</nav>
 
 
 <!-- =========================
-     APP
+     HOME / TICKET PANEL
 ========================= -->
 
-<div id="app">
+<main id="homePage">
 
-<div class="layout">
+    <div class="container">
 
-<!-- SIDEBAR -->
+        <div class="hero">
 
-<aside class="sidebar">
+            <h1>Support Center</h1>
 
-    <div class="brand">
-        <div class="brand-icon">🎫</div>
-        <span>Support Center</span>
-    </div>
-
-    <div class="section-title">
-        General
-    </div>
-
-    <button class="nav-btn active" onclick="showPage('home', this)">
-        🏠 <span>Home</span>
-    </button>
-
-    <button class="nav-btn" onclick="showPage('tickets', this)">
-        🎫 <span>My Tickets</span>
-    </button>
-
-    <div id="staffNavigation" style="display:none">
-
-        <div class="section-title">
-            Staff
-        </div>
-
-        <button class="nav-btn" onclick="showPage('allTickets', this)">
-            🛠️ <span>All Tickets</span>
-        </button>
-
-        <button class="nav-btn" onclick="showPage('roles', this)">
-            👑 <span>Roles</span>
-        </button>
-
-    </div>
-
-    <div class="user-box">
-
-        <div class="user-info">
-
-            <img
-                id="userAvatar"
-                class="avatar"
-                src=""
-                alt="Avatar"
-            >
-
-            <div>
-                <div id="userName" class="username">
-                    Loading...
-                </div>
-
-                <div id="userRole" class="role">
-                    Member
-                </div>
-            </div>
-
-        </div>
-
-        <button class="logout-btn" onclick="logout()">
-            Logout
-        </button>
-
-    </div>
-
-</aside>
-
-
-<!-- CONTENT -->
-
-<main class="content">
-
-<!-- HOME -->
-
-<section id="home" class="page active">
-
-    <div class="hero">
-
-        <h1>Need help?</h1>
-
-        <p>
-            Open a support ticket and our team will help you.
-            Please provide as much information as possible so
-            we can solve your problem quickly.
-        </p>
-
-        <button
-            class="open-ticket-btn"
-            onclick="openTicketModal()"
-        >
-            🎫 Open a Ticket
-        </button>
-
-    </div>
-
-    <div class="stats">
-
-        <div class="stat">
-            <div id="openCount" class="stat-number">0</div>
-            <div class="stat-label">Open Tickets</div>
-        </div>
-
-        <div class="stat">
-            <div id="closedCount" class="stat-number">0</div>
-            <div class="stat-label">Closed Tickets</div>
-        </div>
-
-        <div class="stat">
-            <div class="stat-number">24/7</div>
-            <div class="stat-label">Support System</div>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- MY TICKETS -->
-
-<section id="tickets" class="page">
-
-    <h1 class="page-title">
-        My Tickets
-    </h1>
-
-    <p class="page-description">
-        View and manage your support tickets.
-    </p>
-
-    <div id="ticketList" class="ticket-list"></div>
-
-</section>
-
-
-<!-- ALL TICKETS -->
-
-<section id="allTickets" class="page">
-
-    <h1 class="page-title">
-        All Tickets
-    </h1>
-
-    <p class="page-description">
-        Staff ticket management.
-    </p>
-
-    <div id="allTicketList" class="ticket-list"></div>
-
-</section>
-
-
-<!-- ROLES -->
-
-<section id="roles" class="page">
-
-    <h1 class="page-title">
-        Role Management
-    </h1>
-
-    <p class="page-description">
-        Manage website roles and permissions.
-    </p>
-
-    <table class="role-table">
-
-        <thead>
-
-            <tr>
-                <th>User</th>
-                <th>Current Role</th>
-                <th>Change Role</th>
-            </tr>
-
-        </thead>
-
-        <tbody id="roleTableBody"></tbody>
-
-    </table>
-
-</section>
-
-
-<!-- TICKET VIEW -->
-
-<section id="ticketView" class="ticket-view">
-
-    <div class="ticket-header">
-
-        <div class="ticket-header-left">
-
-            <h2 id="ticketHeaderTitle">
-                Ticket
-            </h2>
-
-            <p id="ticketHeaderMeta">
-                General Support
+            <p>
+                Need help? Open a ticket and our team
+                will help you as soon as possible.
             </p>
 
         </div>
 
-        <div class="ticket-actions">
+
+        <!-- THIS IS THE TICKET PANEL -->
+
+        <div class="ticket-panel">
+
+            <div class="panel-icon">
+                🎫
+            </div>
+
+            <h2>How can we help?</h2>
+
+            <p>
+                Click the button below to create a ticket.
+                Choose a category and explain your problem
+                clearly.
+            </p>
 
             <button
-                class="small-btn"
-                id="claimButton"
-                onclick="claimTicket()"
+                class="open-btn"
+                onclick="openCreateModal()"
             >
-                👤 Claim
+                🎫 Create a Ticket
             </button>
 
-            <button
-                class="small-btn close-ticket"
-                id="closeButton"
-                onclick="closeTicket()"
-            >
-                🔒 Close
-            </button>
+        </div>
+
+
+        <div class="info-grid">
+
+            <div class="info-card">
+                <h3>🛠️ Support</h3>
+                <p>
+                    Get help from our support team.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h3>🚨 Reports</h3>
+                <p>
+                    Report a player, bug or other issue.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h3>💳 Purchases</h3>
+                <p>
+                    Need help with a purchase?
+                    Open a ticket here.
+                </p>
+            </div>
 
         </div>
 
     </div>
 
-    <div
-        id="messages"
-        class="messages"
-    ></div>
-
-    <div class="message-box">
-
-        <input
-            id="messageInput"
-            type="text"
-            placeholder="Type a message..."
-            onkeydown="handleMessageKey(event)"
-        >
-
-        <button
-            class="send-btn"
-            onclick="sendMessage()"
-        >
-            Send
-        </button>
-
-    </div>
-
-</section>
-
 </main>
-
-</div>
-</div>
 
 
 <!-- =========================
      CREATE TICKET MODAL
 ========================= -->
 
-<div id="ticketModal" class="modal">
+<div id="createModal" class="modal">
 
     <div class="modal-box">
 
         <h2>🎫 Create a Ticket</h2>
 
         <label>
-            Subject
+            Ticket Subject
         </label>
 
         <input
-            id="ticketSubject"
-            placeholder="Example: I need help with my account"
+            id="subject"
+            placeholder="What do you need help with?"
         >
+
 
         <label>
             Category
         </label>
 
-        <select id="ticketCategory">
+        <select id="category">
 
-            <option>General Support</option>
-            <option>Technical Issue</option>
-            <option>Report</option>
-            <option>Purchase</option>
-            <option>Other</option>
+            <option value="General Support">
+                🛠️ General Support
+            </option>
+
+            <option value="Report">
+                🚨 Report
+            </option>
+
+            <option value="Purchase">
+                💳 Purchase
+            </option>
+
+            <option value="Technical">
+                ⚙️ Technical Issue
+            </option>
 
         </select>
+
 
         <label>
             Message
         </label>
 
         <textarea
-            id="ticketMessage"
+            id="firstMessage"
             placeholder="Explain your problem..."
         ></textarea>
 
-        <div class="modal-actions">
+
+        <div class="modal-buttons">
 
             <button
-                class="secondary"
-                onclick="closeTicketModal()"
+                class="cancel"
+                onclick="closeCreateModal()"
             >
                 Cancel
             </button>
 
             <button
-                class="primary"
+                class="create"
                 onclick="createTicket()"
             >
                 Create Ticket
@@ -1070,6 +802,144 @@ textarea:focus {
 </div>
 
 
+<!-- =========================
+     TICKET DASHBOARD
+========================= -->
+
+<section id="dashboard" class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+            <h1>🎫 Your Tickets</h1>
+            <p style="color:#858e9e;margin-top:5px;">
+                Manage your support tickets.
+            </p>
+        </div>
+
+        <button
+            class="back-btn"
+            onclick="showHome()"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+
+    <div id="ticketList" class="ticket-list"></div>
+
+
+    <!-- ROLES -->
+
+    <div class="roles">
+
+        <h2>👑 Available Roles</h2>
+
+        <div class="role-list">
+
+            <div class="role owner">
+                👑 Owner
+            </div>
+
+            <div class="role admin">
+                🛡️ Admin
+            </div>
+
+            <div class="role moderator">
+                🔨 Moderator
+            </div>
+
+            <div class="role support">
+                🎧 Support
+            </div>
+
+            <div class="role member">
+                👤 Member
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CHAT
+========================= -->
+
+<section id="chat" class="chat">
+
+    <div class="chat-header">
+
+        <div>
+
+            <div
+                id="chatTitle"
+                class="chat-title"
+            >
+                Ticket
+            </div>
+
+            <div
+                id="chatCategory"
+                class="chat-category"
+            >
+                General Support
+            </div>
+
+        </div>
+
+
+        <div class="chat-actions">
+
+            <button
+                class="action"
+                onclick="claimTicket()"
+            >
+                👤 Claim
+            </button>
+
+            <button
+                id="closeBtn"
+                class="action close"
+                onclick="toggleTicketStatus()"
+            >
+                🔒 Close
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="chatMessages"
+        class="chat-messages"
+    ></div>
+
+
+    <div class="message-input">
+
+        <input
+            id="messageInput"
+            placeholder="Message..."
+            onkeydown="messageKey(event)"
+        >
+
+        <button
+            class="send"
+            onclick="sendMessage()"
+        >
+            Send
+        </button>
+
+    </div>
+
+</section>
+
+
 <!-- TOAST -->
 
 <div id="toast" class="toast"></div>
@@ -1077,609 +947,331 @@ textarea:focus {
 
 <script>
 
-/* =====================================================
-   SUPABASE CONFIG
-===================================================== */
+/* =========================================
+   DATA
+========================================= */
 
-/*
-   PUT YOUR OWN SUPABASE VALUES HERE.
+let tickets =
+    JSON.parse(
+        localStorage.getItem("websiteTickets")
+    ) || [];
 
-   Supabase Dashboard
-   -> Project Settings
-   -> API
-
-   Use the Project URL and Publishable/Anon key.
-
-   NEVER put your service_role key here.
-*/
-
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-const SUPABASE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
-
-const db = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+let currentTicketId = null;
 
 
-/* =====================================================
-   GLOBAL VARIABLES
-===================================================== */
+/* =========================================
+   SAVE
+========================================= */
 
-let currentUser = null;
-let currentProfile = null;
-let currentTicket = null;
+function saveTickets() {
 
+    localStorage.setItem(
+        "websiteTickets",
+        JSON.stringify(tickets)
+    );
 
-/* =====================================================
-   LOGIN
-===================================================== */
-
-async function loginWithDiscord() {
-
-    const { error } = await db.auth.signInWithOAuth({
-        provider: "discord",
-        options: {
-            redirectTo: window.location.origin + window.location.pathname
-        }
-    });
-
-    if (error) {
-        showToast(error.message);
-    }
 }
 
 
-/* =====================================================
-   CHECK LOGIN
-===================================================== */
+/* =========================================
+   CREATE MODAL
+========================================= */
 
-async function checkAuth() {
-
-    const {
-        data: {
-            session
-        }
-    } = await db.auth.getSession();
-
-    if (session) {
-
-        currentUser = session.user;
-
-        await loadProfile();
-
-    } else {
-
-        showLogin();
-
-    }
-}
-
-
-/* =====================================================
-   PROFILE
-===================================================== */
-
-async function loadProfile() {
-
-    const {
-        data,
-        error
-    } = await db
-        .from("profiles")
-        .select("*")
-        .eq("id", currentUser.id)
-        .single();
-
-    if (error) {
-
-        console.error(error);
-
-        showToast(
-            "Could not load your profile."
-        );
-
-        return;
-    }
-
-    currentProfile = data;
-
-    document.getElementById("userName").textContent =
-        data.username || "User";
-
-    document.getElementById("userRole").textContent =
-        formatRole(data.role);
-
-    const avatar =
-        data.avatar_url ||
-        "https://cdn.discordapp.com/embed/avatars/0.png";
-
-    document.getElementById("userAvatar").src = avatar;
-
-    showApp();
-
-    setupPermissions();
-
-    await loadTickets();
-
-    await updateStats();
-}
-
-
-/* =====================================================
-   UI LOGIN / APP
-===================================================== */
-
-function showLogin() {
-
-    document.getElementById("loginScreen").style.display =
-        "flex";
-
-    document.getElementById("app").style.display =
-        "none";
-}
-
-
-function showApp() {
-
-    document.getElementById("loginScreen").style.display =
-        "none";
-
-    document.getElementById("app").style.display =
-        "block";
-}
-
-
-/* =====================================================
-   ROLES
-===================================================== */
-
-function formatRole(role) {
-
-    const roles = {
-        owner: "👑 Owner",
-        admin: "🛡️ Admin",
-        moderator: "🔨 Moderator",
-        support: "🎧 Support",
-        member: "👤 Member"
-    };
-
-    return roles[role] || "👤 Member";
-}
-
-
-function isStaff() {
-
-    return [
-        "owner",
-        "admin",
-        "moderator",
-        "support"
-    ].includes(currentProfile.role);
-}
-
-
-function isAdmin() {
-
-    return [
-        "owner",
-        "admin"
-    ].includes(currentProfile.role);
-}
-
-
-function isOwner() {
-
-    return currentProfile.role === "owner";
-}
-
-
-function setupPermissions() {
-
-    const staffNav =
-        document.getElementById("staffNavigation");
-
-    if (isStaff()) {
-
-        staffNav.style.display = "block";
-
-    } else {
-
-        staffNav.style.display = "none";
-
-    }
-}
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-function showPage(pageId, button) {
+function openCreateModal() {
 
     document
-        .querySelectorAll(".page")
-        .forEach(page => {
+        .getElementById("createModal")
+        .classList.add("active");
 
-            page.classList.remove("active");
-
-        });
-
-    const page =
-        document.getElementById(pageId);
-
-    if (page) {
-        page.classList.add("active");
-    }
-
-    document
-        .querySelectorAll(".nav-btn")
-        .forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
-
-    if (button) {
-        button.classList.add("active");
-    }
-
-    if (pageId === "tickets") {
-        loadTickets();
-    }
-
-    if (pageId === "allTickets") {
-        loadAllTickets();
-    }
-
-    if (pageId === "roles") {
-        loadRoles();
-    }
 }
 
 
-/* =====================================================
+function closeCreateModal() {
+
+    document
+        .getElementById("createModal")
+        .classList.remove("active");
+
+}
+
+
+/* =========================================
    CREATE TICKET
-===================================================== */
+========================================= */
 
-function openTicketModal() {
-
-    document
-        .getElementById("ticketModal")
-        .classList.add("show");
-
-}
-
-
-function closeTicketModal() {
-
-    document
-        .getElementById("ticketModal")
-        .classList.remove("show");
-
-}
-
-
-async function createTicket() {
+function createTicket() {
 
     const subject =
         document
-            .getElementById("ticketSubject")
+            .getElementById("subject")
             .value
             .trim();
 
     const category =
         document
-            .getElementById("ticketCategory")
+            .getElementById("category")
             .value;
 
-    const message =
+    const firstMessage =
         document
-            .getElementById("ticketMessage")
+            .getElementById("firstMessage")
             .value
             .trim();
 
-    if (!subject || !message) {
+
+    if (!subject || !firstMessage) {
 
         showToast(
-            "Please enter a subject and message."
+            "Please fill in all fields."
         );
 
         return;
-    }
 
-    const {
-        data: ticket,
-        error
-    } = await db
-        .from("tickets")
-        .insert({
-            user_id: currentUser.id,
-            subject: subject,
-            category: category
-        })
-        .select()
-        .single();
-
-    if (error) {
-
-        console.error(error);
-
-        showToast(
-            error.message
-        );
-
-        return;
     }
 
 
-    const {
-        error: messageError
-    } = await db
-        .from("ticket_messages")
-        .insert({
-            ticket_id: ticket.id,
-            user_id: currentUser.id,
-            message: message
-        });
+    const ticket = {
+
+        id:
+            Date.now(),
+
+        number:
+            Math.floor(
+                1000 +
+                Math.random() * 9000
+            ),
+
+        subject:
+            subject,
+
+        category:
+            category,
+
+        status:
+            "open",
+
+        claimed:
+            false,
+
+        created:
+            new Date().toLocaleString(),
+
+        messages: [
+
+            {
+
+                author:
+                    "Riyad",
+
+                role:
+                    "Member",
+
+                message:
+                    firstMessage,
+
+                time:
+                    new Date().toLocaleTimeString()
+
+            }
+
+        ]
+
+    };
 
 
-    if (messageError) {
+    tickets.unshift(ticket);
 
-        console.error(messageError);
+    saveTickets();
 
-        showToast(
-            messageError.message
-        );
-
-        return;
-    }
+    closeCreateModal();
 
 
-    document
-        .getElementById("ticketSubject")
-        .value = "";
+    document.getElementById("subject").value = "";
+    document.getElementById("firstMessage").value = "";
 
-    document
-        .getElementById("ticketMessage")
-        .value = "";
-
-    closeTicketModal();
 
     showToast(
         "Ticket created successfully!"
     );
 
-    await loadTickets();
 
     openTicket(ticket.id);
 }
 
 
-/* =====================================================
-   LOAD USER TICKETS
-===================================================== */
+/* =========================================
+   SHOW DASHBOARD
+========================================= */
 
-async function loadTickets() {
+function showDashboard() {
+
+    document
+        .getElementById("homePage")
+        .style.display = "none";
+
+    document
+        .getElementById("chat")
+        .classList.remove("active");
+
+    document
+        .getElementById("dashboard")
+        .classList.add("active");
+
+    renderTickets();
+
+}
+
+
+/* =========================================
+   SHOW HOME
+========================================= */
+
+function showHome() {
+
+    document
+        .getElementById("dashboard")
+        .classList.remove("active");
+
+    document
+        .getElementById("chat")
+        .classList.remove("active");
+
+    document
+        .getElementById("homePage")
+        .style.display = "block";
+
+}
+
+
+/* =========================================
+   RENDER TICKETS
+========================================= */
+
+function renderTickets() {
 
     const list =
         document.getElementById("ticketList");
 
     list.innerHTML = "";
 
-    const {
-        data,
-        error
-    } = await db
-        .from("tickets")
-        .select("*")
-        .eq("user_id", currentUser.id)
-        .order("created_at", {
-            ascending: false
-        });
 
-    if (error) {
+    if (tickets.length === 0) {
 
-        list.innerHTML =
-            `<div class="empty">
-                Could not load tickets.
-            </div>`;
+        list.innerHTML = `
 
-        return;
-    }
+            <div class="empty">
 
-    if (!data.length) {
-
-        list.innerHTML =
-            `<div class="empty">
-                <div class="empty-icon">🎫</div>
-                <p>You don't have any tickets yet.</p>
-            </div>`;
-
-        return;
-    }
-
-
-    data.forEach(ticket => {
-
-        list.appendChild(
-            createTicketElement(ticket)
-        );
-
-    });
-}
-
-
-/* =====================================================
-   LOAD ALL TICKETS
-===================================================== */
-
-async function loadAllTickets() {
-
-    if (!isStaff()) return;
-
-    const list =
-        document.getElementById("allTicketList");
-
-    list.innerHTML = "";
-
-    const {
-        data,
-        error
-    } = await db
-        .from("tickets")
-        .select("*")
-        .order("created_at", {
-            ascending: false
-        });
-
-    if (error) {
-
-        list.innerHTML =
-            `<div class="empty">
-                Could not load tickets.
-            </div>`;
-
-        return;
-    }
-
-
-    if (!data.length) {
-
-        list.innerHTML =
-            `<div class="empty">
-                <div class="empty-icon">🎫</div>
-                <p>No tickets exist.</p>
-            </div>`;
-
-        return;
-    }
-
-
-    data.forEach(ticket => {
-
-        list.appendChild(
-            createTicketElement(ticket)
-        );
-
-    });
-}
-
-
-/* =====================================================
-   TICKET ELEMENT
-===================================================== */
-
-function createTicketElement(ticket) {
-
-    const element =
-        document.createElement("div");
-
-    element.className = "ticket";
-
-    element.onclick = () =>
-        openTicket(ticket.id);
-
-    const statusClass =
-        ticket.status === "open"
-            ? "open"
-            : "closed";
-
-    element.innerHTML = `
-
-        <div class="ticket-left">
-
-            <div class="ticket-icon">
-                🎫
-            </div>
-
-            <div>
-
-                <div class="ticket-title">
-                    ${escapeHtml(ticket.subject)}
+                <div style="font-size:45px;">
+                    🎫
                 </div>
 
-                <div class="ticket-meta">
-                    ${escapeHtml(ticket.category)}
-                    •
-                    ${formatDate(ticket.created_at)}
+                <p style="margin-top:10px;">
+                    You don't have any tickets.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    tickets.forEach(ticket => {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "ticket-item";
+
+        item.onclick = () =>
+            openTicket(ticket.id);
+
+
+        item.innerHTML = `
+
+            <div class="ticket-left">
+
+                <div class="ticket-icon">
+                    🎫
+                </div>
+
+                <div>
+
+                    <div class="ticket-name">
+                        #${ticket.number}
+                        ${escapeHTML(ticket.subject)}
+                    </div>
+
+                    <div class="ticket-info">
+                        ${escapeHTML(ticket.category)}
+                        •
+                        ${ticket.created}
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
 
-        <span class="status ${statusClass}">
-            ${ticket.status.toUpperCase()}
-        </span>
-    `;
+            <span class="badge ${ticket.status}">
+                ${ticket.status.toUpperCase()}
+            </span>
 
-    return element;
+        `;
+
+
+        list.appendChild(item);
+
+    });
+
 }
 
 
-/* =====================================================
+/* =========================================
    OPEN TICKET
-===================================================== */
+========================================= */
 
-async function openTicket(ticketId) {
+function openTicket(id) {
 
-    const {
-        data: ticket,
-        error
-    } = await db
-        .from("tickets")
-        .select("*")
-        .eq("id", ticketId)
-        .single();
-
-    if (error) {
-
-        showToast(
-            "Could not open ticket."
-        );
-
-        return;
-    }
-
-
-    if (
-        ticket.user_id !== currentUser.id
-        &&
-        !isStaff()
-    ) {
-
-        showToast(
-            "You don't have permission to view this ticket."
-        );
-
-        return;
-    }
-
-
-    currentTicket = ticket;
-
-
-    document
-        .querySelectorAll(".page")
-        .forEach(page =>
-            page.classList.remove("active")
+    const ticket =
+        tickets.find(
+            t => t.id === id
         );
 
 
-    document
-        .getElementById("ticketView")
-        .classList.add("show");
+    if (!ticket) return;
+
+
+    currentTicketId =
+        id;
 
 
     document
-        .getElementById("ticketHeaderTitle")
+        .getElementById("homePage")
+        .style.display = "none";
+
+    document
+        .getElementById("dashboard")
+        .classList.remove("active");
+
+    document
+        .getElementById("chat")
+        .classList.add("active");
+
+
+    document
+        .getElementById("chatTitle")
         .textContent =
-            "# " + ticket.subject;
+            "# " +
+            ticket.number +
+            " • " +
+            ticket.subject;
 
 
     document
-        .getElementById("ticketHeaderMeta")
+        .getElementById("chatCategory")
         .textContent =
             ticket.category +
             " • " +
@@ -1687,153 +1279,165 @@ async function openTicket(ticketId) {
 
 
     const closeButton =
-        document.getElementById("closeButton");
+        document.getElementById("closeBtn");
 
-    if (ticket.status === "closed") {
 
-        closeButton.textContent =
-            "🔓 Reopen";
-
-        closeButton.onclick =
-            reopenTicket;
-
-    } else {
+    if (ticket.status === "open") {
 
         closeButton.textContent =
             "🔒 Close";
 
-        closeButton.onclick =
-            closeTicket;
+    } else {
+
+        closeButton.textContent =
+            "🔓 Reopen";
 
     }
 
 
-    document
-        .getElementById("claimButton")
-        .style.display =
-            isStaff() ? "block" : "none";
+    renderMessages(ticket);
 
-
-    await loadMessages(ticketId);
 }
 
 
-/* =====================================================
-   LOAD MESSAGES
-===================================================== */
+/* =========================================
+   RENDER MESSAGES
+========================================= */
 
-async function loadMessages(ticketId) {
+function renderMessages(ticket) {
 
-    const messages =
-        document.getElementById("messages");
+    const box =
+        document.getElementById(
+            "chatMessages"
+        );
 
-    messages.innerHTML = "";
-
-
-    const {
-        data,
-        error
-    } = await db
-        .from("ticket_messages")
-        .select(`
-            *,
-            profiles (
-                username,
-                avatar_url,
-                role
-            )
-        `)
-        .eq("ticket_id", ticketId)
-        .order("created_at", {
-            ascending: true
-        });
+    box.innerHTML = "";
 
 
-    if (error) {
+    ticket.messages.forEach(msg => {
 
-        console.error(error);
+        const div =
+            document.createElement("div");
 
-        return;
-    }
+        div.className =
+            "message";
 
 
-    data.forEach(message => {
+        div.innerHTML = `
 
-        addMessageToScreen(message);
+            <div class="message-avatar">
+                ${msg.author.charAt(0)}
+            </div>
+
+            <div>
+
+                <div>
+
+                    <span class="message-name">
+                        ${escapeHTML(msg.author)}
+                    </span>
+
+                    <span class="message-time">
+                        ${escapeHTML(msg.role)}
+                        •
+                        ${escapeHTML(msg.time)}
+                    </span>
+
+                </div>
+
+                <div class="message-text">
+                    ${escapeHTML(msg.message)}
+                </div>
+
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
 
     });
 
 
-    messages.scrollTop =
-        messages.scrollHeight;
+    box.scrollTop =
+        box.scrollHeight;
+
 }
 
 
-/* =====================================================
-   ADD MESSAGE
-===================================================== */
-
-function addMessageToScreen(message) {
-
-    const container =
-        document.getElementById("messages");
-
-    const div =
-        document.createElement("div");
-
-    div.className = "message";
-
-
-    const profile =
-        message.profiles || {};
-
-
-    const avatar =
-        profile.avatar_url ||
-        "https://cdn.discordapp.com/embed/avatars/0.png";
-
-
-    div.innerHTML = `
-
-        <img
-            class="message-avatar"
-            src="${escapeHtml(avatar)}"
-            alt=""
-        >
-
-        <div>
-
-            <div>
-
-                <span class="message-author">
-                    ${escapeHtml(
-                        profile.username || "User"
-                    )}
-                </span>
-
-                <span class="message-time">
-                    ${formatDate(message.created_at)}
-                </span>
-
-            </div>
-
-            <div class="message-text">
-                ${escapeHtml(message.message)}
-            </div>
-
-        </div>
-    `;
-
-
-    container.appendChild(div);
-}
-
-
-/* =====================================================
+/* =========================================
    SEND MESSAGE
-===================================================== */
+========================================= */
 
-function handleMessageKey(event) {
+function sendMessage() {
+
+    if (!currentTicketId) return;
+
+
+    const input =
+        document.getElementById(
+            "messageInput"
+        );
+
+
+    const text =
+        input.value.trim();
+
+
+    if (!text) return;
+
+
+    const ticket =
+        tickets.find(
+            t => t.id === currentTicketId
+        );
+
+
+    if (!ticket) return;
+
+
+    if (ticket.status === "closed") {
+
+        showToast(
+            "This ticket is closed."
+        );
+
+        return;
+
+    }
+
+
+    ticket.messages.push({
+
+        author:
+            "Riyad",
+
+        role:
+            "Member",
+
+        message:
+            text,
+
+        time:
+            new Date().toLocaleTimeString()
+
+    });
+
+
+    saveTickets();
+
+    input.value = "";
+
+    renderMessages(ticket);
+
+}
+
+
+/* =========================================
+   ENTER TO SEND
+========================================= */
+
+function messageKey(event) {
 
     if (
         event.key === "Enter"
@@ -1846,612 +1450,93 @@ function handleMessageKey(event) {
         sendMessage();
 
     }
+
 }
 
 
-async function sendMessage() {
+/* =========================================
+   CLAIM
+========================================= */
 
-    if (!currentTicket) return;
+function claimTicket() {
 
-    if (currentTicket.status === "closed") {
-
-        showToast(
-            "This ticket is closed."
+    const ticket =
+        tickets.find(
+            t => t.id === currentTicketId
         );
 
-        return;
-    }
+
+    if (!ticket) return;
 
 
-    const input =
-        document.getElementById("messageInput");
+    ticket.claimed = true;
 
-    const message =
-        input.value.trim();
-
-
-    if (!message) return;
-
-
-    const {
-        data,
-        error
-    } = await db
-        .from("ticket_messages")
-        .insert({
-            ticket_id: currentTicket.id,
-            user_id: currentUser.id,
-            message: message
-        })
-        .select(`
-            *,
-            profiles (
-                username,
-                avatar_url,
-                role
-            )
-        `)
-        .single();
-
-
-    if (error) {
-
-        showToast(
-            error.message
-        );
-
-        return;
-    }
-
-
-    input.value = "";
-
-    addMessageToScreen(data);
-
-    const box =
-        document.getElementById("messages");
-
-    box.scrollTop =
-        box.scrollHeight;
-}
-
-
-/* =====================================================
-   CLAIM TICKET
-===================================================== */
-
-async function claimTicket() {
-
-    if (!currentTicket || !isStaff()) {
-        return;
-    }
-
-
-    const {
-        error
-    } = await db
-        .from("tickets")
-        .update({
-            claimed_by: currentUser.id
-        })
-        .eq("id", currentTicket.id);
-
-
-    if (error) {
-
-        showToast(
-            error.message
-        );
-
-        return;
-    }
-
-
-    currentTicket.claimed_by =
-        currentUser.id;
+    saveTickets();
 
 
     showToast(
-        "Ticket claimed!"
-    );
-}
-
-
-/* =====================================================
-   CLOSE TICKET
-===================================================== */
-
-async function closeTicket() {
-
-    if (!currentTicket) return;
-
-
-    if (
-        currentTicket.user_id !== currentUser.id
-        &&
-        !isStaff()
-    ) {
-
-        return;
-    }
-
-
-    const {
-        error
-    } = await db
-        .from("tickets")
-        .update({
-            status: "closed",
-            closed_at: new Date().toISOString()
-        })
-        .eq("id", currentTicket.id);
-
-
-    if (error) {
-
-        showToast(
-            error.message
-        );
-
-        return;
-    }
-
-
-    currentTicket.status = "closed";
-
-
-    document
-        .getElementById("closeButton")
-        .textContent = "🔓 Reopen";
-
-    document
-        .getElementById("closeButton")
-        .onclick = reopenTicket;
-
-
-    showToast(
-        "Ticket closed."
-    );
-}
-
-
-/* =====================================================
-   REOPEN
-===================================================== */
-
-async function reopenTicket() {
-
-    if (!currentTicket) return;
-
-
-    const {
-        error
-    } = await db
-        .from("tickets")
-        .update({
-            status: "open",
-            closed_at: null
-        })
-        .eq("id", currentTicket.id);
-
-
-    if (error) {
-
-        showToast(
-            error.message
-        );
-
-        return;
-    }
-
-
-    currentTicket.status = "open";
-
-
-    document
-        .getElementById("closeButton")
-        .textContent = "🔒 Close";
-
-    document
-        .getElementById("closeButton")
-        .onclick = closeTicket;
-
-
-    showToast(
-        "Ticket reopened."
-    );
-}
-
-
-/* =====================================================
-   ROLE MANAGEMENT
-===================================================== */
-
-async function loadRoles() {
-
-    if (!isAdmin()) {
-
-        showToast(
-            "You don't have permission."
-        );
-
-        return;
-    }
-
-
-    const body =
-        document.getElementById("roleTableBody");
-
-    body.innerHTML = "";
-
-
-    const {
-        data,
-        error
-    } = await db
-        .from("profiles")
-        .select("*")
-        .order("created_at", {
-            ascending: true
-        });
-
-
-    if (error) {
-
-        body.innerHTML =
-            `<tr>
-                <td colspan="3">
-                    Could not load users.
-                </td>
-            </tr>`;
-
-        return;
-    }
-
-
-    data.forEach(profile => {
-
-        const row =
-            document.createElement("tr");
-
-
-        const options = [
-            "member",
-            "support",
-            "moderator",
-            "admin"
-        ];
-
-
-        if (isOwner()) {
-            options.push("owner");
-        }
-
-
-        row.innerHTML = `
-
-            <td>
-                <strong>
-                    ${escapeHtml(
-                        profile.username || "User"
-                    )}
-                </strong>
-            </td>
-
-            <td>
-                ${formatRole(profile.role)}
-            </td>
-
-            <td>
-
-                <select
-                    class="role-select"
-                    onchange="changeRole(
-                        '${profile.id}',
-                        this.value
-                    )"
-                    ${profile.id === currentUser.id
-                        ? "disabled"
-                        : ""}
-                >
-
-                    ${options.map(role => `
-
-                        <option
-                            value="${role}"
-                            ${profile.role === role
-                                ? "selected"
-                                : ""}
-                        >
-                            ${formatRole(role)}
-                        </option>
-
-                    `).join("")}
-
-                </select>
-
-            </td>
-        `;
-
-
-        body.appendChild(row);
-
-    });
-}
-
-
-/* =====================================================
-   CHANGE ROLE
-===================================================== */
-
-async function changeRole(userId, role) {
-
-    if (!isAdmin()) {
-
-        showToast(
-            "You don't have permission."
-        );
-
-        return;
-    }
-
-
-    if (
-        role === "owner"
-        &&
-        !isOwner()
-    ) {
-
-        showToast(
-            "Only the Owner can give Owner."
-        );
-
-        return;
-    }
-
-
-    const {
-        error
-    } = await db
-        .from("profiles")
-        .update({
-            role: role
-        })
-        .eq("id", userId);
-
-
-    if (error) {
-
-        showToast(
-            error.message
-        );
-
-        return;
-    }
-
-
-    showToast(
-        "Role updated successfully."
+        "Ticket claimed by Support."
     );
 
-
-    await loadRoles();
 }
 
 
-/* =====================================================
-   STATS
-===================================================== */
+/* =========================================
+   CLOSE / REOPEN
+========================================= */
 
-async function updateStats() {
+function toggleTicketStatus() {
 
-    const {
-        data,
-        error
-    } = await db
-        .from("tickets")
-        .select("status")
-        .eq("user_id", currentUser.id);
+    const ticket =
+        tickets.find(
+            t => t.id === currentTicketId
+        );
 
 
-    if (error) return;
+    if (!ticket) return;
 
 
-    let open = 0;
-    let closed = 0;
+    if (ticket.status === "open") {
 
+        ticket.status =
+            "closed";
 
-    data.forEach(ticket => {
+        showToast(
+            "Ticket closed."
+        );
 
-        if (ticket.status === "open") {
-            open++;
-        }
+    } else {
 
-        if (ticket.status === "closed") {
-            closed++;
-        }
+        ticket.status =
+            "open";
 
-    });
+        showToast(
+            "Ticket reopened."
+        );
 
-
-    document.getElementById("openCount")
-        .textContent = open;
-
-    document.getElementById("closedCount")
-        .textContent = closed;
-}
-
-
-/* =====================================================
-   REALTIME MESSAGES
-===================================================== */
-
-db
-.channel("ticket-messages")
-.on(
-    "postgres_changes",
-    {
-        event: "INSERT",
-        schema: "public",
-        table: "ticket_messages"
-    },
-    async payload => {
-
-        if (
-            currentTicket
-            &&
-            payload.new.ticket_id ===
-                currentTicket.id
-        ) {
-
-            const {
-                data
-            } = await db
-                .from("ticket_messages")
-                .select(`
-                    *,
-                    profiles (
-                        username,
-                        avatar_url,
-                        role
-                    )
-                `)
-                .eq("id", payload.new.id)
-                .single();
-
-
-            if (data) {
-
-                const messages =
-                    document.getElementById("messages");
-
-                /*
-                   Avoid adding the same message twice.
-                */
-
-                if (
-                    !messages.querySelector(
-                        `[data-message-id="${data.id}"]`
-                    )
-                ) {
-
-                    addRealtimeMessage(data);
-
-                }
-
-            }
-
-        }
-
-    }
-)
-.subscribe();
-
-
-function addRealtimeMessage(message) {
-
-    const messages =
-        document.getElementById("messages");
-
-    /*
-       Only add if it wasn't already added.
-    */
-
-    if (
-        messages.querySelector(
-            `[data-message-id="${message.id}"]`
-        )
-    ) {
-        return;
     }
 
 
-    const div =
-        document.createElement("div");
+    saveTickets();
 
-    div.className = "message";
+    openTicket(ticket.id);
 
-    div.dataset.messageId =
-        message.id;
-
-
-    const profile =
-        message.profiles || {};
-
-
-    const avatar =
-        profile.avatar_url ||
-        "https://cdn.discordapp.com/embed/avatars/0.png";
-
-
-    div.innerHTML = `
-
-        <img
-            class="message-avatar"
-            src="${escapeHtml(avatar)}"
-            alt=""
-        >
-
-        <div>
-
-            <div>
-
-                <span class="message-author">
-                    ${escapeHtml(
-                        profile.username || "User"
-                    )}
-                </span>
-
-                <span class="message-time">
-                    ${formatDate(
-                        message.created_at
-                    )}
-                </span>
-
-            </div>
-
-            <div class="message-text">
-                ${escapeHtml(
-                    message.message
-                )}
-            </div>
-
-        </div>
-    `;
-
-
-    messages.appendChild(div);
-
-    messages.scrollTop =
-        messages.scrollHeight;
 }
 
 
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-async function logout() {
-
-    await db.auth.signOut();
-
-    currentUser = null;
-    currentProfile = null;
-
-    showLogin();
-}
-
-
-/* =====================================================
+/* =========================================
    TOAST
-===================================================== */
+========================================= */
 
-function showToast(message) {
+function showToast(text) {
 
     const toast =
         document.getElementById("toast");
 
-    toast.textContent = message;
+
+    toast.textContent =
+        text;
+
 
     toast.classList.add("show");
 
@@ -2460,61 +1545,69 @@ function showToast(message) {
 
         toast.classList.remove("show");
 
-    }, 3000);
+    }, 2500);
+
 }
 
 
-/* =====================================================
-   HELPERS
-===================================================== */
+/* =========================================
+   ESCAPE HTML
+========================================= */
 
-function formatDate(date) {
-
-    return new Date(date)
-        .toLocaleString();
-}
-
-
-function escapeHtml(text) {
+function escapeHTML(text) {
 
     return String(text)
+
         .replaceAll("&", "&amp;")
+
         .replaceAll("<", "&lt;")
+
         .replaceAll(">", "&gt;")
+
         .replaceAll('"', "&quot;")
+
         .replaceAll("'", "&#039;");
+
 }
 
 
-/* =====================================================
-   AUTH STATE
-===================================================== */
+/* =========================================
+   CLICK OUTSIDE MODAL
+========================================= */
 
-db.auth.onAuthStateChange(
-    async (event, session) => {
+document
+    .getElementById("createModal")
+    .addEventListener(
+        "click",
+        function(event) {
 
-        if (session) {
+            if (
+                event.target === this
+            ) {
 
-            currentUser =
-                session.user;
+                closeCreateModal();
 
-            await loadProfile();
-
-        } else {
-
-            showLogin();
+            }
 
         }
-
-    }
-);
+    );
 
 
-/* =====================================================
-   START
-===================================================== */
+/* =========================================
+   NAVIGATION
+========================================= */
 
-checkAuth();
+/*
+   Double click the logo to open
+   the ticket dashboard.
+*/
+
+document
+    .querySelector(".logo")
+    .addEventListener(
+        "dblclick",
+        showDashboard
+    );
 
 </script>
 
